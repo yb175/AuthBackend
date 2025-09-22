@@ -1,12 +1,11 @@
-# Methods are bassically class k functions 
-- by using methods we don't have to write repeated code again 
+# Methods
+- Functions inside a class.
+- Prevent code repetition.
 
-# Static function : read
+# Static Function(Read about it)
+- Can verify passwords.
+- Useful across different environments (dev, test, prod).
+- `process.env` is global; attach variables to it.
 
-- we can also verify password using this 
-
-- In companies we would have different env for testing also
-
-process.env is a global object but we have to attach with env 
-
-# Express routing 
+# Express Routing
+- Define routes to handle requests.
