@@ -23,7 +23,9 @@ Parses JSON, handles cookies, connects to MongoDB, and manages stateless session
 ```
 .
 ├── .gitignore
-├── api
+├── README.md
+├── Readme2.md
+├── controllers
 │   ├── createUser.js
 │   ├── getdata.js
 │   ├── login.js
@@ -32,10 +34,15 @@ Parses JSON, handles cookies, connects to MongoDB, and manages stateless session
 ├── db
 │   ├── db.js
 │   └── schema
-│       ├── otpSchema.js
-│       └── userSchema.js
+│   ├── otpSchema.js
+│   └── userSchema.js
+├── middleware
+│   └── userAuth.js
 ├── package-lock.json
 ├── package.json
+├── routes
+│   ├── auth.js
+│   └── user.js
 ├── server.js
 └── utils
     └── validator.js
@@ -60,7 +67,7 @@ npm start
 
 ---
 
-### ✅ POST `/createUser`
+### ✅ POST `/auth/createUser`
 
 **Purpose:**
 Start user registration by validating input data and sending an OTP.
@@ -85,7 +92,7 @@ Start user registration by validating input data and sending an OTP.
 
 ---
 
-### ✅ POST `/verifyOtp`
+### ✅ POST `/auth/verifyOtp`
 
 **Purpose:**
 Verify the OTP and create the user account.
@@ -118,7 +125,7 @@ Verify the OTP and create the user account.
 
 ---
 
-### ✅ POST `/login`
+### ✅ POST `/user/login`
 
 **Purpose:**
 Authenticate user and issue a JWT stored in HTTP-only cookies.
@@ -145,7 +152,7 @@ Authenticate user and issue a JWT stored in HTTP-only cookies.
 
 ---
 
-### ✅ GET `/getdata`
+### ✅ GET `/user/getdata`
 
 **Purpose:**
 Access protected route by sending the cookie (with JWT token).
