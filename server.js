@@ -1,19 +1,14 @@
 import express from "express" ; 
 import connectDB from "./db/db.js";
-import createUser from "./api/createUser.js";
-import sendOtp from "./api/sendOtp.js";
-import verifyOtp from "./api/verifyOtp.js";
-import login from "./api/login.js";
 import cookieParser from "cookie-parser";
-import getData from "./api/getdata.js";
-import userAuth from "./middleware/userAuth.js";
+import AuthRouter from "./routes/auth.js";
+import userRouter from "./routes/user.js";
+
 const app = express();
 app.use(express.json()) ; 
 app.use(cookieParser()) ; 
-app.post("/createUser",createUser,sendOtp)
-app.post("/verifyOtp",verifyOtp)
-app.post("/login",login)
-app.get("/getdata",userAuth,getData) ; 
+app.use("/auth",AuthRouter) ; 
+app.use("/user",userRouter) ; 
 await connectDB()
 .then(()=>{
     app.listen(3000 , ()=>{
