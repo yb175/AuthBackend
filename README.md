@@ -9,14 +9,16 @@ Parses JSON, handles cookies, connects to MongoDB, and manages stateless session
 - User Registration with OTP Verification  
 - JWT-based Authentication  
 - Protected Data Access  
-- MongoDB Integration for User & OTP Storage  
+- MongoDB Integration for User & OTP Storage
+- Logout Functionality
 
 ## 💻 Tech Stack
 
 - **Node.js** – JavaScript runtime for backend development  
 - **Express** – Minimalist web framework  
 - **MongoDB** – NoSQL database for storing users and OTPs  
-- **JSON Web Tokens (JWT)** – Secure stateless authentication  
+- **JSON Web Tokens (JWT)** – Secure stateless authentication
+- **Redis:** An in-memory data store used for session management.
 
 ## 📂 Project Structure
 
@@ -25,17 +27,20 @@ Parses JSON, handles cookies, connects to MongoDB, and manages stateless session
 ├── .gitignore
 ├── README.md
 ├── Readme2.md
+├── config
+│   └── redis.js
 ├── controllers
 │   ├── createUser.js
 │   ├── getdata.js
 │   ├── login.js
+│   ├── logout.js
 │   ├── sendOtp.js
 │   └── verifyOtp.js
 ├── db
 │   ├── db.js
 │   └── schema
-│   ├── otpSchema.js
-│   └── userSchema.js
+│       ├── otpSchema.js
+│       └── userSchema.js
 ├── middleware
 │   └── userAuth.js
 ├── package-lock.json
@@ -151,7 +156,24 @@ Authenticate user and issue a JWT stored in HTTP-only cookies.
   ```
 
 ---
+### ✅ POST `/user/logout`
 
+**Purpose:**  
+Logs out the user by blacklisting the current JWT and clearing the cookie.
+
+**Request Headers:**  
+
+- Cookies (must include `token` set during login)
+
+**Responses:**  
+
+* `200 OK`: `"logout successful"`  
+* `500 Internal Server Error`:  
+
+```json
+{ "err": "Error message" }
+```
+---
 ### ✅ GET `/user/getdata`
 
 **Purpose:**
@@ -184,6 +206,7 @@ Access protected route by sending the cookie (with JWT token).
 GMAILID=your-email@gmail.com
 PASSWORD=your-gmail-app-password
 jwt_key=your_super_secret_jwt_key
+REDIS_PASSWORD=your_redis_password
 ```
 
 👉 Example:
@@ -192,6 +215,7 @@ jwt_key=your_super_secret_jwt_key
 GMAILID=myapp@gmail.com  
 PASSWORD=abc123app-password  
 jwt_key=supersecretjwtkey123
+REDIS_PASSWORD=redisi33neurnr33%
 ```
 
 > ⚡ Tip:
